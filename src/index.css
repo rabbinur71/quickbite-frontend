@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* -------------------------------
+  Global Theme Variables (aligned with Theme.js)
+--------------------------------*/
+@theme {
+  --color-primary: #e67e22; /* Warm amber/orange tone */
+  --color-secondary: #f4a261; /* Accent highlight */
+  --color-accent: #d97706; /* Deep gold */
+  --color-golden: #daa520;
+  --color-bg-light: #fffaf3;
+  --color-text-dark: #2f2f2f;
+  --color-text-light: #6b7280;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--color-primary-start);
+  }
+  .text-accent {
+    color: var(--color-accent);
+  }
+  .bg-bg-light {
+    background-color: var(--color-bg-light);
+  }
+}
+
+/* -------------------------------
+  Base Styles
+--------------------------------*/
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text-dark);
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+}
+
+/* -------------------------------
+  Components
+--------------------------------*/
+@layer components {
+  /* Soft golden hover effect */
+  .hover-golden {
+    transition: all 0.3s ease;
+  }
+
+  .hover-golden:hover {
+    color: var(--color-golden);
+    transform: translateY(-2px);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply px-5 py-2.5 font-semibold rounded-full shadow-md transition-all duration-300;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  .btn-outline {
+    @apply px-5 py-2.5 font-semibold rounded-full border transition-all duration-300;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* Frosted glass (used in Navbar, Modals, etc.) */
+  .backdrop-blur-glass {
+    backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* -------------------------------
+  Utilities
+--------------------------------*/
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .golden-glow {
+    filter: drop-shadow(0 0 8px rgba(218, 165, 32, 0.3));
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1.1s ease-out both;
+  }
+
+  .delay-150 {
+    animation-delay: 0.15s;
+  }
+}
+
+/* -------------------------------
+  Keyframes
+--------------------------------*/
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
