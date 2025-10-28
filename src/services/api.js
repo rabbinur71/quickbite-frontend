@@ -3,13 +3,11 @@ import axios from "axios";
 // Dynamic API base URL for production
 const getApiBaseUrl = () => {
   if (import.meta.env.MODE === "development") {
+    // Local development
     return "http://localhost:5000/api";
   } else {
-    // Use environment variable or default to your Render backend URL
-    return (
-      import.meta.env.VITE_API_URL ||
-      "https://quickbite-backend.onrender.com/api"
-    );
+    // Production: use environment variable
+    return import.meta.env.VITE_API_URL || "http://localhost:5000/api";
   }
 };
 
@@ -18,10 +16,10 @@ export const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 10000, // 10 second timeout
+  timeout: 10000, // 10 seconds
 });
 
-// Request interceptor
+// Request interceptor for auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("quickbite_token");
@@ -30,16 +28,14 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Response interceptor
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 || error.response?.status === 403) {
+    if ([401, 403].includes(error.response?.status)) {
       localStorage.removeItem("quickbite_token");
       window.location.href = "/admin/login";
     }
