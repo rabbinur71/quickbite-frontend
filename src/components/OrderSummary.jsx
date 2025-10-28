@@ -41,7 +41,7 @@ const OrderSummary = () => {
                     {item.type === "special" && (
                       <span>
                         {" "}
-                        × ${item.price_per_person?.toFixed(2)}/person
+                        × ৳{item.price_per_person?.toFixed(2)}/person
                       </span>
                     )}
                   </p>
@@ -52,7 +52,7 @@ const OrderSummary = () => {
             {/* Item Total */}
             <div className="text-right">
               <p className="font-semibold text-gray-800">
-                ${(item.price * item.quantity).toFixed(2)}
+                ৳{(item.price * item.quantity).toFixed(2)}
               </p>
             </div>
           </div>
@@ -63,7 +63,7 @@ const OrderSummary = () => {
       <div className="mt-6 pt-4 border-t border-gray-200">
         <div className="flex justify-between items-center text-lg font-bold">
           <span>Total Amount:</span>
-          <span className="text-blue-600">${getTotalPrice().toFixed(2)}</span>
+          <span className="text-blue-600">৳{getTotalPrice().toFixed(2)}</span>
         </div>
       </div>
 
