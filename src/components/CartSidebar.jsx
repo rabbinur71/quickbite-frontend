@@ -122,7 +122,7 @@ const CartSidebar = () => {
                         className="text-lg font-semibold"
                         style={{ color: colors.primaryStart }}
                       >
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ৳{(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
 
@@ -215,7 +215,7 @@ const CartSidebar = () => {
                 style={{ color: colors.textDark }}
               >
                 <span>Total:</span>
-                <span>${getTotalPrice().toFixed(2)}</span>
+                <span>৳{getTotalPrice().toFixed(2)}</span>
               </div>
 
               {/* Actions */}
