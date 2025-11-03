@@ -1,13 +1,14 @@
 import axios from "axios";
 
-// Dynamic API base URL for production
 const getApiBaseUrl = () => {
   if (import.meta.env.MODE === "development") {
-    // Local development
     return "http://localhost:5000/api";
   } else {
-    // Production: use environment variable
-    return import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+    //  production fallback + allow override via env var
+    return (
+      import.meta.env.VITE_API_URL ||
+      "https://quickbite-backend-6d7i.onrender.com/api"
+    );
   }
 };
 
